@@ -1,0 +1,147 @@
+<dashboard>
+  <label>3D Scatterplots</label>
+  <row>
+    <html>
+      <h2>
+        Try scrolling, clicking, and dragging. If you are using a touch pad, please explore one, two, and three finger interactions.
+        There are options in the top right for the default single click's behaviour.
+      </h2>
+    </html>
+  </row>
+  <row>
+    <panel>
+      <title>Retail Customers</title>
+      <viz type="scatterplot3d_app.scatter3d">
+        <title>Recency / Frequency / Monetary</title>
+        <search>
+          <query>| inputlookup retail_customers.csv | table cluster frequency recency monetary | eval recency = recency*-1</query>
+          <earliest>0</earliest>
+        </search>
+        <option name="scatterplot3d_app.scatter3d.bgColor">white</option>
+        <option name="scatterplot3d_app.scatter3d.size">7.5</option>
+        <option name="scatterplot3d_app.scatter3d.opacity">0.4</option>
+        <option name="scatterplot3d_app.scatter3d.symbol">circle</option>
+        <option name="scatterplot3d_app.scatter3d.lineColor">#FFF</option>
+        <option name="scatterplot3d_app.scatter3d.lineWidth">0</option>
+        <option name="scatterplot3d_app.scatter3d.showLegend">1</option>
+        <option name="scatterplot3d_app.scatter3d.aspectMode">auto</option>
+        <option name="scatterplot3d_app.scatter3d.xAspectRatio">1</option>
+        <option name="scatterplot3d_app.scatter3d.yAspectRatio">1</option>
+        <option name="scatterplot3d_app.scatter3d.zAspectRatio">1</option>
+      </viz>
+    </panel>
+    <panel>
+      <title>Datacratic Clusters (10,000 points)</title>
+      <viz type="scatterplot3d_app.scatter3d">
+        <title>User's behaviour + Dimensionality Reduction</title>
+        <search>
+          <query>| inputlookup datacratic.csv | rename cid as "cluster_id" | outputlookup datacratic.csv</query>
+          <earliest>0</earliest>
+        </search>
+        <option name="bgColor">black</option>
+        <option name="colors">['#1e93c6','#f2b827','#d6563c','#6a5c9e','#31a35f','#ed8440','#3863a0','#a2cc3e','#cc5068','#73427f']</option>
+        <option name="lineColor">'black'</option>
+        <option name="lineWidth">0.5</option>
+        <option name="opacity">1</option>
+        <option name="size">5</option>
+        <option name="symbol">'circle-open'</option>
+        <option name="scatterplot3d_app.scatter3d.bgColor">white</option>
+        <option name="scatterplot3d_app.scatter3d.size">3.5</option>
+        <option name="scatterplot3d_app.scatter3d.opacity">1</option>
+        <option name="scatterplot3d_app.scatter3d.symbol">diamond-open</option>
+        <option name="scatterplot3d_app.scatter3d.lineColor">#000000</option>
+        <option name="scatterplot3d_app.scatter3d.lineWidth">-1</option>
+        <option name="scatterplot3d_app.scatter3d.showLegend">0</option>
+        <option name="scatterplot3d_app.scatter3d.aspectMode">manual</option>
+        <option name="scatterplot3d_app.scatter3d.xAspectRatio">2.5</option>
+        <option name="scatterplot3d_app.scatter3d.yAspectRatio">2.5</option>
+        <option name="scatterplot3d_app.scatter3d.zAspectRatio">2.5</option>
+      </viz>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <html>
+        <p>
+          Read more about the dataset and RFM modeling <a href="www.palgrave-journals.com/dbm/journal/v19/n3/full/dbm201217a.html">here</a>.
+        </p>
+      </html>
+    </panel>
+    <panel>
+      <html>
+        <p>
+          Read more about the dataset and dimensionality reduction for visualization <a href="datacratic.com/site/blog/visualizing-high-dimensional-data-browser-svd-t-sne-and-threejs">here</a>.
+        </p>
+      </html>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>20 Cities</title>
+      <viz type="scatterplot3d_app.scatter3d">
+        <title>Density / Area / Population</title>
+        <search>
+          <query>| inputlookup city_population.csv             | sort 20 -Density             | table City Area Population Density</query>
+        </search>
+        <option name="bgColor">'white'</option>
+        <option name="colors">['#1e93c6','#f2b827','#d6563c','#6a5c9e','#31a35f','#ed8440','#3863a0','#a2cc3e','#cc5068','#73427f']</option>
+        <option name="lineColor">'black'</option>
+        <option name="lineWidth">1</option>
+        <option name="opacity">0.9</option>
+        <option name="size">8</option>
+        <option name="symbol">'circle-open'</option>
+        <option name="scatterplot3d_app.scatter3d.bgColor">white</option>
+        <option name="scatterplot3d_app.scatter3d.size">9</option>
+        <option name="scatterplot3d_app.scatter3d.opacity">0.8</option>
+        <option name="scatterplot3d_app.scatter3d.symbol">cross</option>
+        <option name="scatterplot3d_app.scatter3d.lineColor">#555</option>
+        <option name="scatterplot3d_app.scatter3d.lineWidth">0.5</option>
+      </viz>
+    </panel>
+    <panel>
+      <title>Marketing Promotion Efficacy</title>
+      <viz type="scatterplot3d_app.scatter3d">
+        <title>Promotions / Revenue / Age</title>
+        <search>
+          <query>| inputlookup marketingcampaign.csv
+| eval Market = MarketID + " " + MarketSize
+| table Market AgeOfStore Promotion SalesInThousands</query>
+          <earliest>0</earliest>
+          <latest></latest>
+        </search>
+        <option name="scatterplot3d_app.scatter3d.bgColor">white</option>
+        <option name="scatterplot3d_app.scatter3d.size">8</option>
+        <option name="scatterplot3d_app.scatter3d.opacity">0.8</option>
+        <option name="scatterplot3d_app.scatter3d.symbol">circle</option>
+        <option name="scatterplot3d_app.scatter3d.lineColor">#000000</option>
+        <option name="scatterplot3d_app.scatter3d.lineWidth">1</option>
+        <option name="scatterplot3d_app.scatter3d.zTitle">$1000s</option>
+        <option name="scatterplot3d_app.scatter3d.xTitle">Age of Store</option>
+        <option name="scatterplot3d_app.scatter3d.yTitle">Marketing Promotion</option>
+      </viz>
+    </panel>
+  </row>
+  <row>
+    <panel>
+      <title>Employees</title>
+      <viz type="scatterplot3d_app.scatter3d">
+        <title>Hourly Rate / Age / Monthly Income</title>
+        <search>
+          <query>| inputlookup attrition.csv | where random() % 10 == 0 | table JobRole MonthlyIncome Age HourlyRate</query>
+          <earliest>0</earliest>
+        </search>
+        <option name="scatterplot3d_app.scatter3d.bgColor">black</option>
+        <option name="scatterplot3d_app.scatter3d.size">8</option>
+        <option name="scatterplot3d_app.scatter3d.opacity">0.8</option>
+        <option name="scatterplot3d_app.scatter3d.symbol">diamond</option>
+        <option name="scatterplot3d_app.scatter3d.lineColor">#FFF</option>
+        <option name="scatterplot3d_app.scatter3d.lineWidth">1</option>
+        <option name="scatterplot3d_app.scatter3d.showLegend">1</option>
+        <option name="scatterplot3d_app.scatter3d.aspectMode">manual</option>
+        <option name="scatterplot3d_app.scatter3d.yAspectRatio">3</option>
+        <option name="scatterplot3d_app.scatter3d.xAspectRatio">2</option>
+        <option name="scatterplot3d_app.scatter3d.zAspectRatio">1</option>
+      </viz>
+    </panel>
+  </row>
+</dashboard>

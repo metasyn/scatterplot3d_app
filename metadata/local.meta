@@ -1,0 +1,20 @@
+[app/ui]
+version = 6.4.0
+modtime = 1460259088.600651000
+
+[app/launcher]
+version = 6.4.0
+modtime = 1460259088.604029000
+
+[app/package/check_for_updates]
+version = 6.4.0
+modtime = 1460259088.605469000
+
+[views/3d_scatterplot]
+owner = admin
+version = 6.4.0
+modtime = 1460756841.643714000
+
+[nav/default]
+version = 6.4.0
+modtime = 1461015035.564494000

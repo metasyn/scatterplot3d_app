@@ -1,0 +1,134 @@
+<form class="splunk-formatter-section" section-label="General">
+    <div class="control-group">
+        <label class="control-label">Background Color</label>
+        <div class="controls controls-fill">
+            <splunk-radio-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.bgColor" value="white">
+                <option value="black">Black</option>
+                <option value="white">White</option>
+            </splunk-radio-input>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Show Legend</label>
+        <div class="controls controls-fill">
+            <splunk-radio-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.showLegend" value="1">
+                <option value="1">True</option>
+                <option value="0">False</option>
+            </splunk-radio-input>
+        </div>
+    </div>
+</form>
+
+<form class="splunk-formatter-section" section-label="Aspect">
+    <div class="control-group">
+        <label class="control-label">Aspect Mode</label>
+        <div class="controls controls-fill">
+            <splunk-select name="display.visualizations.custom.scatterplot3d_app.scatter3d.aspectMode" value="auto">
+                <option value="auto">Auto</option>
+                <option value="cube">Cube</option>
+                <option value="data">Data</option>
+                <option value="manual">Manual</option>
+            </splunk-select>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">X Aspect Ratio</label>
+        <div class="controls controls-fill">
+            <splunk-text-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.xAspectRatio"></splunk-text-input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Y Aspect Ratio</label>
+        <div class="controls controls-fill">
+            <splunk-text-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.yAspectRatio"></splunk-text-input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Z Aspect Ratio</label>
+        <div class="controls controls-fill">
+            <splunk-text-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.zAspectRatio"></splunk-text-input>
+        </div>
+    </div>
+</form>
+
+
+<form class="splunk-formatter-section" section-label="Marker">
+    <div class="control-group">
+        <label class="control-label">Size</label>
+        <div class="controls controls-fill">
+            <splunk-text-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.size" value="8"></splunk-text-input>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Opacity</label>
+        <div class="controls controls-fill">
+            <splunk-text-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.opacity" value="0.8"></splunk-text-input>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Symbol</label>
+        <div class="controls controls-fill">
+            <splunk-select name="display.visualizations.custom.scatterplot3d_app.scatter3d.symbol" value="circle">
+                <option value="circle"></option>
+                <option value="circle-open"></option>
+                <option value="square"></option>
+                <option value="square-open"></option>
+                <option value="diamond"></option>
+                <option value="diamond-open"></option>
+                <option value="cross"></option>
+                <option value="x"></option>
+            </splunk-select>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Line Color</label>
+        <div class="controls controls-fill">
+            <splunk-color-picker name="display.visualizations.custom.scatterplot3d_app.scatter3d.lineColor" value="#000"></splunk-color-picker>
+        </div>
+    </div>
+
+    <div class="control-group">
+        <label class="control-label">Line Width</label>
+        <div class="controls controls-fill">
+            <splunk-text-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.lineWidth" value="1"></splunk-text-input>
+        </div>        
+    </div>
+</form>
+
+<form class="splunk-formatter-section" section-label="Colors">
+    <div class="control-group">
+        <label class="control-label">Colors</label>
+        <div class="controls controls-block">
+            <splunk-text-area name="display.visualizations.custom.scatterplot3d_app.scatter3d.colors"></splunk-text-area>
+        </div>
+    </div>
+    <div>
+        <span class="help-block" style="margin: 15px 0px 15px 20px">Enter newline or space separated hexcodes.</span>
+    </div>
+</form>
+
+<form class="splunk-formatter-section" section-label="Axes">
+    <div class="control-group">
+        <label class="control-label">X-Axis Label</label>
+        <div class="controls controls-fill">
+            <splunk-text-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.xTitle"></splunk-text-input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Y-Axis Label</label>
+        <div class="controls controls-fill">
+            <splunk-text-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.yTitle"></splunk-text-input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Z-Axis Label</label>
+        <div class="controls controls-fill">
+            <splunk-text-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.zTitle"></splunk-text-input>
+        </div>
+    </div>
+</form>

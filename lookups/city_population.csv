@@ -1,0 +1,126 @@
+Area,City,Country,Density,Population
+6993,"Tokyo/Yokohama",Japan,4750,33200000
+8683,"New York Metro",USA,2050,17800000
+1968,"Sao Paulo",Brazil,9000,17700000
+1049,"Seoul/Incheon","South Korea",16700,17500000
+2072,"Mexico City",Mexico,8400,17400000
+2564,"Osaka/Kobe/Kyoto",Japan,6400,16425000
+1399,Manila,Philippines,10550,14750000
+484,Mumbai,India,29650,14350000
+1295,Delhi,India,11050,14300000
+1360,Jakarta,Indonesia,10500,14250000
+738,Lagos,Nigeria,18150,13400000
+531,Kolkata,India,23900,12700000
+1295,Cairo,Egypt,9400,12200000
+4320,"Los Angeles",USA,2750,11789000
+2266,"Buenos Aires",Argentina,4950,11200000
+1580,"Rio de Janeiro",Brazil,6850,10800000
+2150,Moscow,Russia,4900,10500000
+746,Shanghai,China,13400,10000000
+518,Karachi,Pakistan,18900,9800000
+2723,Paris,France,3550,9645000
+1166,Istanbul,Turkey,7700,9000000
+2875,Nagoya,Japan,3150,9000000
+748,Beijing,China,11500,8614000
+5498,Chicago,USA,1500,8308000
+1623,London,UK,5100,8278000
+466,Shenzhen,China,17150,8000000
+2642,"Essen/Dusseldorf",Germany,2800,7350000
+686,Tehran,Iran,10550,7250000
+518,Bogota,Colombia,13500,7000000
+596,Lima,Peru,11750,7000000
+1010,Bangkok,Thailand,6450,6500000
+2396,"Johannesburg/East Rand","South Africa",2500,6000000
+414,Chennai,India,14350,5950000
+376,Taipei,Taiwan,15200,5700000
+596,Baghdad,Iraq,9250,5500000
+648,Santiago,Chile,8400,5425000
+534,Bangalore,India,10100,5400000
+583,Hyderabad,India,9100,5300000
+622,"St Petersburg",Russia,8550,5300000
+4661,Philadelphia,USA,1100,5149000
+622,Lahore,Pakistan,8200,5100000
+469,Kinshasa,Congo,10650,5000000
+2891,Miami,USA,1700,4919000
+518,"Ho Chi Minh City",Vietnam,9450,4900000
+945,Madrid,Spain,5200,4900000
+453,Tianjin,China,10500,4750000
+1606,"Kuala Lumpur",Malaysia,2750,4400000
+1655,Toronto,Canada,2650,4367000
+1554,Milan,Italy,2750,4250000
+453,Shenyang,China,9250,4200000
+3644,"Dallas/Fort Worth",USA,1150,4146000
+4497,Boston,USA,900,4032000
+868,"Belo Horizonte",Brazil,4600,4000000
+583,Khartoum,Sudan,6850,4000000
+1101,Riyadh,"Saudi Arabia",3650,4000000
+479,Singapore,Singapore,8350,4000000
+2996,Washington,USA,1300,3934000
+3267,Detroit,USA,1200,3903000
+803,Barcelona,Spain,4850,3900000
+3355,Houston,USA,1150,3823000
+684,Athens,Greece,5400,3685000
+984,Berlin,Germany,3750,3675000
+1687,Sydney,Australia,2100,3502000
+5083,Atlanta,USA,700,3500000
+596,Guadalajara,Mexico,5900,3500000
+1365,"San Francisco/Oakland",USA,2350,3229000
+1740,"Montreal.",Canada,1850,3216000
+479,Monterey,Mexico,6700,3200000
+2080,Melbourne,Australia,1500,3162000
+583,Ankara,Turkey,5300,3100000
+376,Recife,Brazil,8050,3025000
+2069,"Phoenix/Mesa",USA,1400,2907000
+829,Durban,"South Africa",3500,2900000
+583,"Porto Alegre",Brazil,4800,2800000
+389,Dalian,China,7100,2750000
+777,Jeddah,"Saudi Arabia",3550,2750000
+2470,Seattle,USA,1100,2712000
+686,"Cape Town","South Africa",3950,2700000
+2026,"San Diego",USA,1300,2674000
+583,Fortaleza,Brazil,4550,2650000
+648,Curitiba,Brazil,3850,2500000
+842,Rome,Italy,2950,2500000
+583,Naples,Italy,4100,2400000
+2316,"Minneapolis/St. Paul",USA,1050,2389000
+453,"Tel Aviv",Israel,5050,2300000
+600,Birmingham,UK,3800,2284000
+984,Frankfurt,Germany,2300,2260000
+881,Lisbon,Portugal,2550,2250000
+558,Manchester,UK,4000,2245000
+2309,"San Juan","Puerto Rico",950,2217000
+544,Katowice,Poland,4050,2200000
+531,Tashkent,Uzbekistan,4150,2200000
+544,Fukuoka,Japan,3950,2150000
+544,"Baku/Sumqayit",Azerbaijan,3850,2100000
+2147,"St. Louis",USA,950,2078000
+1768,Baltimore,USA,1150,2076000
+414,Sapporo,Japan,5000,2075000
+2078,"Tampa/St. Petersburg",USA,1000,2062000
+510,Taichung,Taiwan,3900,2000000
+466,Warsaw,Poland,4300,2000000
+1292,Denver,USA,1550,1985000
+816,"Cologne/Bonn",Germany,2400,1960000
+829,Hamburg,Germany,2300,1925000
+712,Dubai,UAE,2650,1900000
+673,Pretoria,"South Africa",2750,1850000
+1120,Vancouver,Canada,1650,1830000
+648,Beirut,Lebanon,2800,1800000
+702,Budapest,Hungary,2550,1800000
+1676,Cleveland,USA,1050,1787000
+2208,Pittsburgh,USA,800,1753000
+492,Campinas,Brazil,3550,1750000
+712,Harare,Zimbabwe,2450,1750000
+583,Brasilia,Brazil,2800,1625000
+544,Kuwait,Kuwait,2950,1600000
+518,Munich,Germany,3100,1600000
+1228,Portland,USA,1300,1583000
+712,Brussels,Belgium,2200,1570000
+453,Vienna,Austria,3400,1550000
+674,"San Jose",USA,2300,1538000
+673,Damman,"Saudi Arabia",2250,1525000
+816,Copenhagen,Denmark,1850,1525000
+1603,Brisbane,Australia,950,1508000
+1136,"Riverside/San Bernardino",USA,1350,1507000
+1740,Cincinnati,USA,850,1503000
+453,Accra,Ghana,3300,1500000
