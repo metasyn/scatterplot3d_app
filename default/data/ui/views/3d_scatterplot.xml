@@ -35,7 +35,7 @@
       <viz type="scatterplot3d_app.scatter3d">
         <title>User's behaviour + Dimensionality Reduction</title>
         <search>
-          <query>| inputlookup datacratic.csv | rename cid as "cluster_id" | outputlookup datacratic.csv</query>
+          <query>| inputlookup datacratic.csv</query>
           <earliest>0</earliest>
         </search>
         <option name="bgColor">black</option>
@@ -63,14 +63,14 @@
     <panel>
       <html>
         <p>
-          Read more about the dataset and RFM modeling <a href="www.palgrave-journals.com/dbm/journal/v19/n3/full/dbm201217a.html">here</a>.
+            Read more about the dataset and RFM modeling <a href="http://www.palgrave-journals.com/dbm/journal/v19/n3/full/dbm201217a.html">here</a>.
         </p>
       </html>
     </panel>
     <panel>
       <html>
         <p>
-          Read more about the dataset and dimensionality reduction for visualization <a href="datacratic.com/site/blog/visualizing-high-dimensional-data-browser-svd-t-sne-and-threejs">here</a>.
+            Read more about the dataset and dimensionality reduction for visualization <a href="http://datacratic.com/site/blog/visualizing-high-dimensional-data-browser-svd-t-sne-and-threejs">here</a>.
         </p>
       </html>
     </panel>
