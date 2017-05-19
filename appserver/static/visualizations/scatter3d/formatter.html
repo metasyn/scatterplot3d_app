@@ -132,3 +132,27 @@
         </div>
     </div>
 </form>
+
+<form class="splunk-formatter-section" section-label="Rotation">
+    <div class="control-group">
+        <label class="control-label">Rotate Chart</label>
+        <div class="controls controls-fill">
+            <splunk-radio-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.rotate" value="0">
+                <option value="0">False</option>
+                <option value="1">True</option>
+            </splunk-radio-input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Speed</label>
+        <div class="controls controls-fill">
+            <splunk-text-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.speed" value="0.5"></splunk-text-input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Smoothness</label>
+        <div class="controls controls-fill">
+            <splunk-text-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.smoothness" value="10000"></splunk-text-input>
+        </div>
+    </div>
+</form>
