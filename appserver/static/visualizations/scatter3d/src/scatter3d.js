@@ -20,7 +20,7 @@ define([
                 this.id = _.uniqueId('scatter3d');
                 this.$el = $(this.el);
                 this.$el.append('<div id="' + this.id + '" class="splunk-scatter3d"></div>');
-                var req;
+                this.req;
             },
 
             // Implement updateView to render a visualization.
@@ -132,6 +132,8 @@ define([
 
                 // Counter
                 var i = 0
+                var that = this;
+                console.log(this)
 
                 function update(i) {
                     Plotly.animate(id, {
@@ -169,21 +171,19 @@ define([
                         i = 0
                     }
                     
-                    // RECUSION IS BROKEN
-
-                    console.log('inner')
-                    console.log(rotate)
-                    if (rotate){
-                        req = requestAnimationFrame(update)
-                    } else { return }
+                    var inner_rotate = that._config['display.visualizations.custom.scatterplot3d_app.scatter3d.rotate']
+                    inner_rotate = Boolean(parseInt(inner_rotate))
+                    console.log(inner_rotate)
+                    if (inner_rotate){
+                        requestAnimationFrame(update)
+                    }
                 }
+
+                // OUTSIDE 
 
                 if (rotate) {
-                    req = requestAnimationFrame(update)
-                } else if (req != null) {
-                    cancelAnimationFrame(req)
+                    requestAnimationFrame(update)
                 }
-
 
             },
 
