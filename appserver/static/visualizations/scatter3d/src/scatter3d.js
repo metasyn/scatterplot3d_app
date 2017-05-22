@@ -89,7 +89,7 @@ define([
                         }
                     }
 
-                };
+                }; // end of layout
 
 
                 // Here is where we grab user's settings OR input the defaults
@@ -121,36 +121,56 @@ define([
                         modeBarButtonsToRemove: ['sendDataToCloud', 'resetCameraLastSave3d']
                     });
 
+                // This is ugly and stupid and I'm sorry.
                 id = this.$el.children('.splunk-scatter3d')[0].id
 
-                var smoothness = config['display.visualizations.custom.scatterplot3d_app.scatter3d.smoothness'] || 10000
-                var speed = config['display.visualizations.custom.scatterplot3d_app.scatter3d.speed'] || 0.5
-                var rotate = config['display.visualizations.custom.scatterplot3d_app.scatter3d.rotate']
-                var rotate = rotate === "1" ? true : false
-                console.log('outer')
-                console.log(rotate)
+                // Grab options
+                this.steps = config['display.visualizations.custom.scatterplot3d_app.scatter3d.steps'] || 10000
+                this.rotate = config['display.visualizations.custom.scatterplot3d_app.scatter3d.rotate'] || false
+                this.rotate_z = config['display.visualizations.custom.scatterplot3d_app.scatter3d.rotate_z'] || false
+                this.zoom = config['display.visualizations.custom.scatterplot3d_app.scatter3d.zoom'] || 1.5 
+
+                // Convert
+                this.steps = parseFloat(this.steps)
+                this.zoom = parseFloat(this.zoom)
+                this.rotate = this.rotate === "1" ? true : false
+                this.rotate_z = this.rotate_z === "1" ? true : false
 
                 // Counter
-                var i = 0
+                var i = 0;
                 var that = this;
-                console.log(this)
 
                 function update(i) {
+                    var inner_zoom = that.zoom;
+                    var steps = that.steps;
+                    var inner_rotate = that.rotate;
+                    var inner_rotate_z = that.rotate_z;
+
+                    var inner_eye = {
+                        x: Math.cos(2 * Math.PI * i / steps) * inner_zoom, 
+                        y: Math.sin(2 * Math.PI * i / steps) * inner_zoom, 
+                        z: inner_zoom 
+                    }
+
+                    if (inner_rotate_z){
+                        var inner_eye = {
+                            x: Math.cos(2 * Math.PI * i / steps) * inner_zoom, 
+                            y: Math.sin(2 * Math.PI * i / steps) * inner_zoom, 
+                            z: Math.sin(2 * Math.PI * i / steps) * inner_zoom
+                        }
+                    }
+
                     Plotly.animate(id, {
                         layout: {
                             scene: {
                                 camera: {
-                                    eye: {
-                                        x: Math.cos(2 * Math.PI * i / smoothness) * 2,
-                                        y: Math.sin(2 * Math.PI * i / smoothness) * 2,
-                                        z: Math.sin(2 * Math.PI * i / smoothness) * 2,
-                                    }
+                                    eye: inner_eye 
                                 }
                             }
                         }
                     }, {
                         transition: {
-                            duration: 0
+                            duration: 0 
                         },
                         frame: {
                             duration: 0,
@@ -158,30 +178,18 @@ define([
                         }
                     })
 
-                    function sleep(ms) {
-                        return new Promise(resolve => setTimeout(resolve, ms));
-                    }
-
-                    // Slow down sonny
-                    sleep(speed * 20000)
-
                     // Increment &/or reset counter
                     i += 0.1
-                    if (i == smoothness) {
+                    if (i == steps) {
                         i = 0
                     }
-                    
-                    var inner_rotate = that._config['display.visualizations.custom.scatterplot3d_app.scatter3d.rotate']
-                    inner_rotate = Boolean(parseInt(inner_rotate))
-                    console.log(inner_rotate)
-                    if (inner_rotate){
+
+                    if (inner_rotate) {
                         requestAnimationFrame(update)
                     }
                 }
 
-                // OUTSIDE 
-
-                if (rotate) {
+                if (this.rotate) {
                     requestAnimationFrame(update)
                 }
 
@@ -260,7 +268,6 @@ define([
                 // becuase that is how the stats function formats our data
                 // which is the most likely command used to generate this data
 
-
                 var categoricalValues = [];
                 var transformed = [];
 
@@ -320,7 +327,6 @@ define([
 
                 for (var t = 0; t < transformed.length; t++) {
                     // for each column of the data we make a new trace
-
 
                     // I put defaults in here but they get overwritten in updateView
                     // its just to have the keys in the trace

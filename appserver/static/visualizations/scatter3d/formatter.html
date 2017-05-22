@@ -144,15 +144,24 @@
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label">Speed</label>
+        <label class="control-label">Rotate Zoom</label>
         <div class="controls controls-fill">
-            <splunk-text-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.speed" value="0.5"></splunk-text-input>
+            <splunk-radio-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.rotate_z" value="0">
+                <option value="0">False</option>
+                <option value="1">True</option>
+            </splunk-radio-input>
         </div>
     </div>
     <div class="control-group">
-        <label class="control-label">Smoothness</label>
+        <label class="control-label">Camera Position (Lower = Closer to Origin)</label>
         <div class="controls controls-fill">
-            <splunk-text-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.smoothness" value="10000"></splunk-text-input>
+            <splunk-text-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.zoom" value="1.5"></splunk-text-input>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label">Steps / Speed (granularity of rotation)</label>
+        <div class="controls controls-fill">
+            <splunk-text-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.steps" value="10000"></splunk-text-input>
         </div>
     </div>
 </form>
