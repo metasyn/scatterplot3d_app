@@ -20,13 +20,15 @@ define([
                 this.id = _.uniqueId('scatter3d');
                 this.$el = $(this.el);
                 this.$el.append('<div id="' + this.id + '" class="splunk-scatter3d"></div>');
-                this.req;
+                this.cam;
             },
 
             // Implement updateView to render a visualization.
             //  'data' will be the data object returned from formatData or from the search
             //  'config' will be the configuration property object
             updateView: function(data, config) {
+
+                console.log('update')
 
                 // clear for re-draw
                 $('#' + this.id).empty()
@@ -46,31 +48,35 @@ define([
 
                 // get user defined colors
                 try {
-                    this.colors = config['display.visualizations.custom.scatterplot3d_app.scatter3d.colors']
-                        .split(/\s|,/)
+                    this.colors = config['display.visualizations.custom.scatterplot3d_app.scatter3d.colors'].split(/\s|,/)
                 } catch (e) {
                     this.colors = colorList;
                 }
 
                 // Legend handling
                 var userLegend = config['display.visualizations.custom.scatterplot3d_app.scatter3d.showLegend'];
-                if (userLegend === "0") {
-                    userLegend = Boolean(parseInt(userLegend));
-                } else {
-                    userLegend = true;
+                userLegend = userLegend === "0" ? false : true
+
+                var defaultCamera = { eye: { x: 1.25,  y: 1.25, z: 1.25, }, center: { x: 0, y: 0, z: 0, }, up: { x: 0, y: 0, z: 1, } } 
+
+                try {
+                    // Capture the camera if it already exists with this monstrosity
+                    this.cam = this.$el.children('.splunk-scatter3d')[0]['_fullLayout']['scene']['_scene'].getCamera()
+                } catch (e){
+                    // if there is no camera, set it to the default
+                    this.cam = defaultCamera
                 }
+
+                // store whichever camera was taken into the config
+                config['display.visualization.custom.scatterplot3d_app.scatter3d.camera'] = this.cam
 
                 var layout = {
                     showlegend: userLegend,
-                    margin: {
-                        l: 15,
-                        r: 15,
-                        b: 15,
-                        t: 15
-                    },
+                    margin: { l: 15, r: 15, b: 15, t: 15 },
                     height: this.$el.height(),
                     width: this.$el.width(),
                     scene: {
+                        camera: config['display.visualization.custom.scatterplot3d_app.scatter3d.camera'],
                         aspectmode: config['display.visualizations.custom.scatterplot3d_app.scatter3d.aspectMode'] || 'auto',
                         aspectratio: {
                             x: config['display.visualizations.custom.scatterplot3d_app.scatter3d.xAspectRatio'],
@@ -99,7 +105,6 @@ define([
                         data[m]['marker']['opacity'] = parseFloat(config['display.visualizations.custom.scatterplot3d_app.scatter3d.opacity']) || 0.8;
                         data[m]['marker']['symbol'] = config['display.visualizations.custom.scatterplot3d_app.scatter3d.symbol']
                         data[m]['marker']['line']['color'] = config['display.visualizations.custom.scatterplot3d_app.scatter3d.lineColor'] || 'black';
-
                         var userLineWidth = parseFloat(config['display.visualizations.custom.scatterplot3d_app.scatter3d.lineWidth'])
                         data[m]['marker']['line']['width'] = userLineWidth === 0 ? -1 : userLineWidth || 1
                     }
@@ -109,7 +114,6 @@ define([
                     this.$el.children('.splunk-scatter3d')[0],
                     data,
                     layout,
-
                     // full options can be found here:
                     // https://github.com/plotly/plotly.js/blob/master/src/plot_api/plot_config.js#L22-L86
                     {
@@ -121,50 +125,46 @@ define([
                         modeBarButtonsToRemove: ['sendDataToCloud', 'resetCameraLastSave3d']
                     });
 
-                // This is ugly and stupid and I'm sorry.
-                id = this.$el.children('.splunk-scatter3d')[0].id
 
                 // Grab options
                 this.steps = config['display.visualizations.custom.scatterplot3d_app.scatter3d.steps'] || 10000
-                this.rotate = config['display.visualizations.custom.scatterplot3d_app.scatter3d.rotate'] || false
-                this.rotate_z = config['display.visualizations.custom.scatterplot3d_app.scatter3d.rotate_z'] || false
-                this.zoom = config['display.visualizations.custom.scatterplot3d_app.scatter3d.zoom'] || 1.5 
+                this.rotate = config['display.visualizations.custom.scatterplot3d_app.scatter3d.rotate'] || ""
+                this.i = config['display.visualizations.custom.scatterplot3d_app.scatter3d.i'] || 0
 
                 // Convert
                 this.steps = parseFloat(this.steps)
                 this.zoom = parseFloat(this.zoom)
-                this.rotate = this.rotate === "1" ? true : false
-                this.rotate_z = this.rotate_z === "1" ? true : false
+                this.rotate = Boolean(this.rotate)
 
                 // Counter
-                var i = 0;
                 var that = this;
 
+                start = $.extend(true, {}, this.cam.eye)
+
+                var i = this.i;
+
                 function update(i) {
-                    var inner_zoom = that.zoom;
+                    // recursive animation loop
+                    i += 0.1
+
                     var steps = that.steps;
-                    var inner_rotate = that.rotate;
-                    var inner_rotate_z = that.rotate_z;
+                    var innerRotate = that.rotate;
 
-                    var inner_eye = {
-                        x: Math.cos(2 * Math.PI * i / steps) * inner_zoom, 
-                        y: Math.sin(2 * Math.PI * i / steps) * inner_zoom, 
-                        z: inner_zoom 
+                    var radius = Math.sqrt( Math.pow(start.x, 2) + Math.pow(start.y, 2))
+                    var cos = radius * Math.cos(2 * Math.PI * i / steps);
+                    var sin = radius * Math.sin(2 * Math.PI * i / steps);
+
+                    var innerEye = {
+                        x: cos,
+                        y: sin, 
+                        z: start.z
                     }
 
-                    if (inner_rotate_z){
-                        var inner_eye = {
-                            x: Math.cos(2 * Math.PI * i / steps) * inner_zoom, 
-                            y: Math.sin(2 * Math.PI * i / steps) * inner_zoom, 
-                            z: Math.sin(2 * Math.PI * i / steps) * inner_zoom
-                        }
-                    }
-
-                    Plotly.animate(id, {
+                    Plotly.animate(that.id, {
                         layout: {
                             scene: {
                                 camera: {
-                                    eye: inner_eye 
+                                    eye: innerEye 
                                 }
                             }
                         }
@@ -178,21 +178,17 @@ define([
                         }
                     })
 
-                    // Increment &/or reset counter
-                    i += 0.1
-                    if (i == steps) {
-                        i = 0
-                    }
-
-                    if (inner_rotate) {
+                    // this is where the recursion starts
+                    if (innerRotate) {
                         requestAnimationFrame(update)
                     }
+
                 }
 
+                // start recursing
                 if (this.rotate) {
                     requestAnimationFrame(update)
                 }
-
             },
 
             // Search data params
