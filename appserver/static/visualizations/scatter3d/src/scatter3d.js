@@ -28,8 +28,6 @@ define([
             //  'config' will be the configuration property object
             updateView: function(data, config) {
 
-                console.log('update')
-
                 // clear for re-draw
                 $('#' + this.id).empty()
 
@@ -127,12 +125,12 @@ define([
 
 
                 // Grab options
-                this.steps = config['display.visualizations.custom.scatterplot3d_app.scatter3d.steps'] || 10000
+                this.speed = config['display.visualizations.custom.scatterplot3d_app.scatter3d.speed'] || 1
                 this.rotate = config['display.visualizations.custom.scatterplot3d_app.scatter3d.rotate'] || ""
                 this.i = config['display.visualizations.custom.scatterplot3d_app.scatter3d.i'] || 0
 
                 // Convert
-                this.steps = parseFloat(this.steps)
+                this.speed = 10000 / parseFloat(this.speed) 
                 this.zoom = parseFloat(this.zoom)
                 this.rotate = Boolean(this.rotate)
 
@@ -147,12 +145,12 @@ define([
                     // recursive animation loop
                     i += 0.1
 
-                    var steps = that.steps;
+                    var speed = that.speed;
                     var innerRotate = that.rotate;
 
                     var radius = Math.sqrt( Math.pow(start.x, 2) + Math.pow(start.y, 2))
-                    var cos = radius * Math.cos(2 * Math.PI * i / steps);
-                    var sin = radius * Math.sin(2 * Math.PI * i / steps);
+                    var cos = radius * Math.cos(2 * Math.PI * i / speed);
+                    var sin = radius * Math.sin(2 * Math.PI * i / speed);
 
                     var innerEye = {
                         x: cos,
@@ -195,7 +193,7 @@ define([
             getInitialDataParams: function() {
                 return ({
                     outputMode: SplunkVisualizationBase.ROW_MAJOR_OUTPUT_MODE,
-                    count: 20000
+                    count: 50000 
                 });
             },
 
@@ -233,9 +231,9 @@ define([
                 }
 
                 // Throw Error if too many rows
-                if (rowsLength > 20000) {
+                if (rowsLength > 50000) {
                     throw new SplunkVisualizationBase.VisualizationError(
-                        'Row limit exceeded: 20,000'
+                        'Row limit exceeded: 50,000'
                     );
                 }
 
@@ -275,11 +273,6 @@ define([
                     }
                 })
 
-                // throw error if too many categorical values
-                if (categoricalValues.length > 20) {
-                    throw new SplunkVisualizationBase.VisualizationError(
-                        'Categorical value limit exceeded: 20')
-                }
 
                 for (var cv = 0; cv < categoricalValues.length; cv++) {
 
