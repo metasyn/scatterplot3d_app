@@ -8,7 +8,7 @@
     "devbuild": "$SPLUNK_HOME/bin/splunk cmd node ./node_modules/webpack/bin/webpack.js --progress",
     "watch": "$SPLUNK_HOME/bin/splunk cmd node ./node_modules/webpack/bin/webpack.js -d --watch --progress"
   },
-  "author": "Splunk",
+  "author": "Xander Johnson",
   "license": "MIT",
   "devDependencies": {
     "eslint": "^3.19.0",
