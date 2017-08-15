@@ -102,6 +102,15 @@
 
 <form class="splunk-formatter-section" section-label="Colors">
     <div class="control-group">
+        <label class="control-label">Use custom colors</label>
+        <div class="controls controls-fill">
+            <splunk-radio-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.useCustomColors" value="0">
+                <option value="1">True</option>
+                <option value="0">False</option>
+            </splunk-radio-input>
+        </div>
+    </div>
+    <div class="control-group">
         <label class="control-label">Colors</label>
         <div class="controls controls-block">
             <splunk-text-area name="display.visualizations.custom.scatterplot3d_app.scatter3d.colors"></splunk-text-area>
@@ -137,9 +146,9 @@
     <div class="control-group">
         <label class="control-label">Rotate Chart</label>
         <div class="controls controls-fill">
-            <splunk-radio-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.rotate" value="">
-                <option value="">False</option>
-                <option value="please">True</option>
+            <splunk-radio-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.rotate" value="0">
+                <option value="0">False</option>
+                <option value="1">True</option>
             </splunk-radio-input>
         </div>
     </div>
@@ -148,5 +157,16 @@
         <div class="controls controls-fill">
             <splunk-text-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.speed" value="1"></splunk-text-input>
         </div>
+    </div>
+</form>
+<form class="splunk-formatter-section" section-label="Limits">
+    <div class="control-group">
+        <label class="control-label">Categorical Limit</label>
+        <div class="controls controls-fill">
+            <splunk-text-input name="display.visualizations.custom.scatterplot3d_app.scatter3d.catLimit" value="20"></splunk-text-input>
+        </div>
+    </div>
+    <div>
+      <span class="help-block" style="margin: 15px 0px 15px 20px">Increasing past a certain point may break the visualization and or your browser tab.</span>
     </div>
 </form>
