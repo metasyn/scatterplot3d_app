@@ -20,8 +20,7 @@ define([
         this.$el = $(this.el)
         this.$el.append('<div id="' + this.id + '" class="splunk-scatter3d"></div>')
         this.cam = undefined
-
-        console.log(Plotly)
+        this.stale = false 
       },
 
       // Implement updateView to render a visualization.
@@ -32,7 +31,7 @@ define([
         $('#' + this.id).empty()
 
         // splunk colors
-        this.colorList = [
+        defaultColorList = [
           '#1e93c6',
           '#f2b827',
           '#d6563c',
@@ -46,36 +45,43 @@ define([
         ]
 
         // get user defined colors
-        var useCustomColors = config['display.visualizations.custom.scatterplot3d_app.scatter3d.useCustomColors']
+        var colors = config['display.visualizations.custom.scatterplot3d_app.scatter3d.colors'] || ''
 
-        if (useCustomColors === '1') {
+        if (colors !== '') {
           try {
             var split = config['display.visualizations.custom.scatterplot3d_app.scatter3d.colors'].split(/\s+,?/)
-            split = split.map(function (s) {
-              return s.replace(/[^0-9A-F#]/gi, '')
-            })
-
             var validHex = /^#([0-9a-f]{6})$/igm
-
-            var colors = split.map(function (s) {
-              var match = s.match(validHex)
+            var colors = []
+            split.map(function (s) {
+              hex = s.replace(/[^0-9A-F#]/gi, '')
+              var match = hex.match(validHex)
               if (match == null) {
-                console.log(s + ' is not a valid color. There should be a preceeding # and 6 characters of [0-9A-Fa-f].)')
-              } else {
-                if (match.length > 0) {
-                  return match[0]
-                }
+                throw new SplunkVisualizationBase.VisualizationError(
+                  s + ' is not a valid color. There should be a preceeding # and 6 characters of [0-9A-Fa-f].'
+                )
               }
-            }).filter(function (s) {
-              return s !== undefined
+              colors.push(match[0])
             })
-            console.log('Using custom colors:')
+
+            console.log('Using custom colors: ' + colors)
             this.colorList = colors
-            console.log(this.colors)
-            this.invalidateFormatdata()
           } catch (e) {
-            throw SplunkVisualizationBase.VisualizationError('There was an error while parsing custom colors: ' + e)
+            throw new SplunkVisualizationBase.VisualizationError('There was an error while parsing custom colors: ' + e)
           }
+        } else {
+          this.colorList = defaultColorList
+        }
+
+        // Get the colors from the viz
+        var data = this.getCurrentData()
+        var markers = _.pluck(data, "marker") 
+        var dataColors = _.pluck(markers, "color")
+
+        // If our config doesn't match the data, we need to update
+        for (var i = 0; i < dataColors.length; i++) {
+            if (dataColors[i] !== this.colorList[i]) {
+                this.invalidateFormatData()
+            }
         }
 
         // Legend handling
@@ -179,7 +185,6 @@ define([
         this.speed = 10000 / parseFloat(this.speed)
         this.zoom = parseFloat(this.zoom)
         this.rotate = this.rotate === '1'
-        console.log(this.rotate)
 
         // Counter
         var that = this
@@ -234,11 +239,6 @@ define([
         if (this.rotate) {
           window.requestAnimationFrame(update)
         }
-        /*
-        } catch(e) {
-            console.log("caught " + e)
-        }
-        */
       },
 
       // Search data params

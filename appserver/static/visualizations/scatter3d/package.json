@@ -11,9 +11,7 @@
   "author": "Xander Johnson",
   "license": "MIT",
   "devDependencies": {
-    "eslint": "^3.19.0",
-    "eslint-config-airbnb-base": "^11.2.0",
-    "eslint-plugin-import": "^2.2.0",
+    "standard": "^10.0.3",
     "webpack": "^1.12.6"
   },
   "dependencies": {
