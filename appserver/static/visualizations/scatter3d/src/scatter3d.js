@@ -177,12 +177,12 @@ define([
           })
 
         // Grab options
-        this.speed = config['display.visualizations.custom.scatterplot3d_app.scatter3d.speed'] || 1
+        this.speed = 0.3
         this.rotate = config['display.visualizations.custom.scatterplot3d_app.scatter3d.rotate'] || '0'
         this.i = config['display.visualizations.custom.scatterplot3d_app.scatter3d.i'] || 0
 
         // Convert
-        this.speed = 10000 / parseFloat(this.speed)
+        this.speed = 10000 / this.speed
         this.zoom = parseFloat(this.zoom)
         this.rotate = this.rotate === '1'
 
@@ -231,6 +231,7 @@ define([
 
           // this is where the recursion starts
           if (innerRotate) {
+            that.cam.eye = innerEye
             window.requestAnimationFrame(update)
           }
         }
