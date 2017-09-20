@@ -253,6 +253,11 @@ define([
       // Optionally implement to format data returned from search.
       // The returned object will be passed to updateView as 'data'
       formatData: function (data, config) {
+
+        if (this.colorList === undefined) {
+            this.colorList = []
+        }
+
         if (data.rows.length) {
           var fieldsLength = data.fields.length
           var rowsLength = data.rows.length
