@@ -15,7 +15,7 @@
     "webpack": "^1.12.6"
   },
   "dependencies": {
-    "jquery": "^2.2.0",
+    "jquery": "^3.0.0",
     "plotly.js": "^1.29.3",
     "underscore": "^1.8.3"
   }
